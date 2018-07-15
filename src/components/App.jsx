@@ -13,14 +13,16 @@ export default class App extends Component {
       user: 0,
       name: "",
       page: 0,
-      userCount: 0
+      userCount: 0,
+      appOrigin: ""
     }
     this.query = this.query.bind(this);
+    this.appOrigin = this.appOrigin.bind(this);
     this.nameQuery = this.nameQuery.bind(this);
   }
 
-  componentDidMount() {
-    this.query();
+  appOrigin(e) {
+    this.setState({ appOrigin: e.target.value });
   }
 
   query() {
@@ -49,13 +51,13 @@ export default class App extends Component {
   }
 
   nameQuery() {
-    let appOrigin = 'https://app.graphitedocs.com'; //TODO change app origin to whatever app you're querying.
+    let appOrigin = this.state.appOrigin; 
     console.log(this.state.name);
     lookupProfile(this.state.name, "https://core.blockstack.org/v1/names")
       .then((profile) => {
         console.log(profile);
         if(profile.apps) {
-          if(profile.apps[appOrigin]) {
+          if(profile.apps[this.state.appOrigin]) {
             console.log("App User!");
             this.setState({ userCount: this.state.userCount + 1 });
             this.query();
@@ -81,6 +83,9 @@ export default class App extends Component {
     return (
       <div className="site-wrapper">
         <div className="site-wrapper-inner">
+        <h4>Enter app origin domain</h4>
+        <input type="text" value={this.state.appOrigin} onChange={this.appOrigin} />
+        <button onClick={this.query}>Start Query</button>
         <Profile
           userCount={userCount} />
         </div>

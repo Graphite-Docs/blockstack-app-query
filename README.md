@@ -15,9 +15,9 @@ CD into the app directory:
 Install dependencies:  
 `npm install`  
 
-App will be running on http://localhost:8080  
-
 Launch it:  
-`npm run start`  
+`npm run start`   
+
+App will be running on http://localhost:8080. Once running, all you have to do is enter your full app origin domain (ex: https://app.domain.com) and click Start Query.    
 
 **Note: This script takes a LONG time to run. If you lose internet connection, close the window, or turn off your computer, the script will stop and you will need to start again.**
